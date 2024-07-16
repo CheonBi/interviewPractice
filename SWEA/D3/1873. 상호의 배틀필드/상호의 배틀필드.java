@@ -24,18 +24,17 @@ public class Solution {
                     if(map[h][w] == '<' || map[h][w] == '>' || map[h][w] == '^' || map[h][w] == 'v') {
                         cur[0] = h;
                         cur[1] = w;
+                        break;
                     }
                 }
-
-
             }
 
             int N = Integer.parseInt(br.readLine());
             String str = br.readLine();
             char[] command = str.toCharArray();
 
-            for (char c : command) {
-                move(cur[0], cur[1], c);
+            for (int i = 0; i<N; i++) {
+                move(cur[0], cur[1], command[i]);
             }
 
             StringBuilder sb = new StringBuilder();
