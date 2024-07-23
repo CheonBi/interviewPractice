@@ -37,7 +37,7 @@ public class Main {
             if(!visited[i]){
                 visited[i] = true;
                 arr[depth] = i + 1;
-                dfs(i,depth+1);
+                dfs(i+1,depth+1);
                 visited[i] = false;
             }
         }
