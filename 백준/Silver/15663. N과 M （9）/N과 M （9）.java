@@ -20,21 +20,16 @@ public class Main {
 
         arr = new int[M];
         inputs = new int[N];
-
-
-        st = new StringTokenizer(br.readLine());
-        int max = Integer.MIN_VALUE;
-
-        for (int i = 0; i < N; i++) {
-            inputs[i] = Integer.parseInt(st.nextToken());
-        }
-
         visited = new boolean[N];
 
+        st = new StringTokenizer(br.readLine());
+        
+        for (int i = 0; i < N; i++) {
+            inputs[i] = Integer.parseInt(st.nextToken());
+        }        
         Arrays.sort(inputs);
-
+        
         dfs(0);
-
         System.out.println(sb.toString());
     }
 
