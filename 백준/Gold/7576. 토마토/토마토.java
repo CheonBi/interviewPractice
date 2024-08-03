@@ -20,10 +20,11 @@ public class Main {
 		
 		M = Integer.parseInt(st.nextToken());
 		N = Integer.parseInt(st.nextToken());
-		
+				
 		warehouse = new int[N][M];
 		visited = new boolean[N][M];
 		
+		int cnt = 0;
 		for(int y = 0; y<N; y++) {
 			st = new StringTokenizer(br.readLine());
 			for(int x = 0; x<M; x++) {
@@ -32,10 +33,12 @@ public class Main {
 		}
 		
 		System.out.println(dfs());
+		
 	}
 	
 	static int dfs() {
 		Queue<int[]> queue = new LinkedList<>();
+		
 		int days = 0;
 		int noSweet = 0;
 		
@@ -51,8 +54,11 @@ public class Main {
 		
 		while(!queue.isEmpty()) {
 			
+			//성장할 토마토 체크
+			//더이상 없으면 break
 			if(noSweet == 0) break;
-			
+						
+			//하루 성장
 			int size = queue.size();
 			for(int i = 0; i<size; i++) {
 				
@@ -75,7 +81,8 @@ public class Main {
 						queue.offer(new int[] {ny, nx});
 					}
 				}
-			}
+			}			
+			//성장후 최소 날짜 더하기
 			days++;
 		}
 		
