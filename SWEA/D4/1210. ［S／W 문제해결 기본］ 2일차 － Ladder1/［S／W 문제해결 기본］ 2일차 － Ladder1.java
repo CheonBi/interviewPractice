@@ -10,7 +10,6 @@ public class Solution {
 	/*
 	 * 좌 - 우 아래로
 	 */
-	static final int[] LR = new int[] {-1,1};
 	static int[][] ladderMap;
 
 	public static void main(String[] args) throws Exception {
