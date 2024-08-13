@@ -49,7 +49,7 @@ public class Solution {
 				}
 			}
 
-			Kakegurui(0,0);
+			Kakegurui(0);
 
 			sb.append("#").append(tc).append(" ").append(winCnt).append(" ").append(loseCnt).append("\n");
 		}
@@ -58,8 +58,7 @@ public class Solution {
 	}
 
 	//게임 돌리기
-	//순열을 만들기 위한 index parameter
-	static void Kakegurui(int depth, int index) {
+	static void Kakegurui(int depth) {
 		if (depth == 9) {
 			int kyuyoungSum = 0;
 			int inyoungSum = 0;
@@ -90,8 +89,8 @@ public class Solution {
 		for (int i = 0; i < 9; i++) {
 			if (!visited[i]) {
 				visited[i] = true;
-				perm[index] = inyoungCards[i];
-				Kakegurui(depth + 1, index+1);
+				perm[depth] = inyoungCards[i];
+				Kakegurui(depth + 1);
 				visited[i] = false;
 			}
 		}
