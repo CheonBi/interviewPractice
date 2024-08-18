@@ -6,7 +6,6 @@ public class Main {
 	static int[][] delta = new int[][] { { 0, 0 }, { -1, 0 }, { 1, 0 }, { 0, 1 }, { 0, -1 } };
 	static int[][] map;
 	static int[][] sharks;
-//	static ArrayList<int[]> sharks = new ArrayList<>();
 	static int result;
 	static int R, C, M;
 
@@ -24,16 +23,16 @@ public class Main {
 		M = Integer.parseInt(st.nextToken());
 
 		map = new int[R][C];
-		sharks = new int[M][5];
+		sharks = new int[M+1][5];
 
-		for (int y = 0; y < R; y++) {
-			for (int x = 0; x < C; x++) {
-				map[y][x] = -1;
-			}
-		}
+//		for (int y = 0; y < R; y++) {
+//			for (int x = 0; x < C; x++) {
+//				map[y][x] = -1;
+//			}
+//		}
 
 		// 상어들 입력
-		for (int i = 0; i < M; i++) {
+		for (int i = 1; i <= M; i++) {
 			st = new StringTokenizer(br.readLine());
 			int r = Integer.parseInt(st.nextToken()) - 1;
 			int c = Integer.parseInt(st.nextToken()) - 1;
@@ -41,7 +40,6 @@ public class Main {
 			int d = Integer.parseInt(st.nextToken());
 			int z = Integer.parseInt(st.nextToken());
 
-//			sharks.add(new int[] { r, c, s, d, z });
 			sharks[i] = new int[] { r, c, s, d, z };
 			map[r][c] = i;
 		}
@@ -57,7 +55,7 @@ public class Main {
 	}
 
 	static void sharkMove() {
-		for (int i = 0; i < M; i++) {
+		for (int i = 1; i <= M; i++) {
 			if (sharks[i] != null) {
 				int[] shark = sharks[i];
 
@@ -67,7 +65,7 @@ public class Main {
 				int d = shark[3];
 				int z = shark[4];
 				
-				map[y][x] = -1;
+				map[y][x] = 0;
 
 				for (int m = 0; m < s; m++) {
 					int ny = y + delta[d][0];
@@ -94,14 +92,14 @@ public class Main {
 	}
 	
 	static void dieShark() {
-		for(int i = 0; i<M; i++) {
+		for(int i = 1; i<=M; i++) {
 			if(sharks[i] != null) {
 				
 				int y = sharks[i][0];
 				int x = sharks[i][1];
 				int z = sharks[i][4];
 				
-				if(map[y][x] != -1) {
+				if(map[y][x] != 0) {
 					int idx = map[y][x];
 					
 					int sharkSize = sharks[idx][4];
@@ -115,7 +113,7 @@ public class Main {
 						map[y][x] = i;
 					}
 					
-				} else if(map[y][x] == -1) {
+				} else if(map[y][x] == 0) {
 					map[y][x] = i;
 				}
 			}
@@ -126,10 +124,10 @@ public class Main {
 	static void sharkHunt(int curX) {
 		// x축 움직이며 y방향 탐색
 		for (int y = 0; y < R; y++) {
-			if (map[y][curX] != -1) {
+			if (map[y][curX] != 0) {
 				int idx = map[y][curX]; // 잡을 상어의 번호
 				result += sharks[idx][4]; // 잡은 상어의 크기를 더하고
-				map[y][curX] = -1; // 상어가 없는 상태로 초기화
+				map[y][curX] = 0; // 상어가 없는 상태로 초기화
 				sharks[idx] = null;
 				break;
 			}
