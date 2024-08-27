@@ -12,30 +12,20 @@ public class Main {
 		int X = Integer.parseInt(st.nextToken());
 		int K = Integer.parseInt(st.nextToken());
 
-		int[] cups = new int[N + 1];
-		int answer = -1;
-		cups[X] = 1; // 간식이 있는 곳은 1로 변경
-
 		for (int i = 0; i < K; i++) {
 			st = new StringTokenizer(br.readLine());
-
-			// 위치를 바꿀 인덱스
 			int A = Integer.parseInt(st.nextToken());
 			int B = Integer.parseInt(st.nextToken());
-
-			int tmp = cups[A];
-			cups[A] = cups[B];
-			cups[B] = tmp;
-
-		}
-
-		for (int i = 0; i < cups.length; i++) {
-			if (cups[i] == 1) {
-				answer = i;
+			
+			if(X == A) {
+				X = B;
+			} else if(X == B) {
+				X = A;
 			}
+
 		}
 
-		System.out.println(answer);
+		System.out.println(X);
 		br.close();
 	}
 }
