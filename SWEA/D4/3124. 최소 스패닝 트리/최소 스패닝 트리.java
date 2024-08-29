@@ -18,7 +18,7 @@ public class Solution {
 			int V = Integer.parseInt(st.nextToken());
 			int E = Integer.parseInt(st.nextToken());
 
-			int[] parents = new int[100001];
+			int[] parents = new int[V+1];
 
 			for (int i = 1; i <= V; i++) {
 				parents[i] = -1;
