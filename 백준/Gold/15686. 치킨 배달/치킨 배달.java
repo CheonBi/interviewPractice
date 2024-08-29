@@ -3,17 +3,6 @@ import java.util.*;
 
 public class Main {
 
-	static int[][] map;
-
-	static final int[] dy = { 0, 1, 0, -1 };
-	static final int[] dx = { 1, 0, -1, 0 };
-
-	static boolean[] visited;
-
-	static ArrayList<int[]> chicken = new ArrayList<>();
-	static ArrayList<int[]> house = new ArrayList<>();
-
-	static int N, M;
 	static int answer = Integer.MAX_VALUE;
 
 	public static void main(String[] args) throws Exception {
@@ -23,10 +12,14 @@ public class Main {
 
 		st = new StringTokenizer(br.readLine());
 
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken()); // 치킨집 개수
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken()); // 치킨집 개수
 
-		map = new int[N][N];
+		int[][] map = new int[N][N];
+
+		// 치킨, 가정집
+		ArrayList<int[]> chicken = new ArrayList<>();
+		ArrayList<int[]> house = new ArrayList<>();
 
 		// 마을정보
 		// 0 : 빈곳 , 1: 일반집, 2: 치킨집
@@ -41,16 +34,16 @@ public class Main {
 			}
 		}
 
-		// 지점수대로 트래킹하기 위한 배열
-		visited = new boolean[chicken.size()];
+		// 지점 트래킹하기 위한 배열
+		boolean[] visited = new boolean[chicken.size()];
 
-		dfs(0, 0);
+		dfs(0, 0, visited, chicken, house, N, M);
 		System.out.println(answer);
 
 		br.close();
 	}
 
-	static void dfs(int depth, int start) {
+	static void dfs(int depth, int start, boolean[] visited, ArrayList<int[]> chicken, ArrayList<int[]> house, int N, int M) {
 		// 지점이 M개 선택됬다면 종료조건
 		if (depth == M) {
 			int sum = 0;
@@ -71,7 +64,7 @@ public class Main {
 		for (int i = start; i < chicken.size(); i++) {
 			if (!visited[i]) {
 				visited[i] = true;
-				dfs(depth + 1, i + 1);
+				dfs(depth + 1, i + 1, visited, chicken, house, N, M);
 				visited[i] = false;
 			}
 		}
