@@ -1,12 +1,29 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+class Main {
 
 	static int N;
 	static int[][] MAP;
 	static final int[][] delta = new int[][] { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
 	static final int INF = Integer.MAX_VALUE;
+
+	static class Node implements Comparable<Node>{
+		int y;
+		int x;
+		int rupee;
+		
+		public Node(int y, int x, int rupee) {
+			this.y = y;
+			this.x = x;
+			this.rupee = rupee;
+		}
+
+		@Override
+		public int compareTo(Node o) {
+			return this.rupee - o.rupee;
+		}
+	}
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -14,10 +31,9 @@ public class Main {
 		StringTokenizer st = null;
 
 		int tc = 1;
-		
+
 		while (true) {
 			N = Integer.parseInt(br.readLine());
-			
 
 			if (N == 0) {
 				break;
@@ -31,7 +47,7 @@ public class Main {
 					MAP[y][x] = Integer.parseInt(st.nextToken());
 				}
 			}
-			
+
 			int result = greenIsZelda();
 
 			sb.append("Problem").append(" ").append(tc).append(":").append(" ").append(result).append("\n");
@@ -43,9 +59,9 @@ public class Main {
 	}
 
 	static int greenIsZelda() {
-		int[][] isVisited = new int[N][N];
+		boolean[][] isVisited = new boolean[N][N];
 		int[][] minLoseRupee = new int[N][N];
-		PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> Integer.compare(o1[2], o2[2]));
+		PriorityQueue<Node> pq = new PriorityQueue<>();
 
 		for (int y = 0; y < N; y++) {
 			for (int x = 0; x < N; x++) {
@@ -55,19 +71,19 @@ public class Main {
 
 		// 시작점 (0,0)
 		minLoseRupee[0][0] = MAP[0][0];
-		pq.offer(new int[] { 0, 0, minLoseRupee[0][0] });
+		pq.offer(new Node(0, 0, MAP[0][0]));
 
 		while (!pq.isEmpty()) {
-			int[] cur = pq.poll();
+			Node cur = pq.poll();
 
-			int curY = cur[0];
-			int curX = cur[1];
-			int curRupee = cur[2];
+			int curY = cur.y;
+			int curX = cur.x;
+			int curRupee = cur.rupee;
 
-			if (isVisited[curY][curX] == 1)
+			if (isVisited[curY][curX])
 				continue;
 
-			isVisited[curY][curX] = 1;
+			isVisited[curY][curX] = true;
 
 			if (curY == N - 1 && curX == N - 1) {
 				return curRupee;
@@ -77,9 +93,9 @@ public class Main {
 				int ny = curY + delta[d][0];
 				int nx = curX + delta[d][1];
 
-				if (isValid(ny, nx) && isVisited[ny][nx] == 0 && minLoseRupee[ny][nx] > curRupee + MAP[ny][nx]) {
+				if (isValid(ny, nx) && !isVisited[ny][nx] && minLoseRupee[ny][nx] > curRupee + MAP[ny][nx]) {
 					minLoseRupee[ny][nx] = curRupee + MAP[ny][nx];
-					pq.offer(new int[] { ny, nx, minLoseRupee[ny][nx] });
+					pq.offer(new Node(ny, nx, minLoseRupee[ny][nx]));
 				}
 
 			}
