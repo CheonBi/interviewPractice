@@ -110,6 +110,7 @@ public class Main {
 
 				if (isValid(ny, nx) && !isVisited[ny][nx] && ifMap[ny][nx] == 0) {
 					ifMap[ny][nx] = 2; // 전염
+                    isVisited[ny][nx] = true;
 					q.offer(new int[] { ny, nx });
 				}
 			}
