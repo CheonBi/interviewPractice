@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.util.*;
 
@@ -31,21 +30,13 @@ public class Main {
 
 				if (MAP[y][x] == 0)
 					pure.add(new int[] { y, x });
-//				else if (MAP[y][x] == 1) {
-//					isVisited[y][x] = true;
-//				}
-
 				else if (MAP[y][x] == 2) {
 					virus.add(new int[] { y, x });
-//					isVisited[y][x] = true;
 				}
 			}
 		}
 
 		int[] walls = new int[3]; // 새로 벽을 세울 포인트를 순열 배열
-//		boolean[] isUsed = new boolean[pure.size()]; //벽을 세울 좌표를 위한 배열
-
-		// 먼저 세팅된 벽과 무조건 세울 3개의 벽, 바이러스를 전체면적에서 제거
 
 		// 세울 벽 위치 찾기
 		combination(0, 0, pure, virus, walls);
@@ -57,16 +48,16 @@ public class Main {
 		if (depth == 3) { //세울 벽 위치를 다 찾았다면 
 
 			//벽세우고
-			swap(walls, pure, 1);
+//			swap(walls, pure, 1);
 
 			//바이러스 전염 bfs
-			int cnt = bfs(virus);
+			int cnt = bfs(pure, virus, walls);
 
 			if (cnt > MAX)
 				MAX = cnt;
 
 			//벽 허물고
-			swap(walls, pure, 0);
+//			swap(walls, pure, 0);
 
 			return;
 		}
@@ -78,7 +69,7 @@ public class Main {
 
 	}
 
-	static int bfs(List<int[]> virus) {
+	static int bfs(List<int[]> pure, List<int[]> virus, int[] walls) {
 		int[][] ifMap = new int[N][M];
 		boolean[][] isVisited = new boolean[N][M]; // 방문처리
 		Queue<int[]> q = new ArrayDeque<>();
@@ -90,7 +81,17 @@ public class Main {
 				ifMap[y][x] = MAP[y][x];
 			}
 		}
+		
+		//벽 세우기
+		for (int i = 0; i < 3; i++) {
+			int[] pos = pure.get(walls[i]);
+			int y = pos[0];
+			int x = pos[1];
+			ifMap[y][x] = 1;
+		}
 
+		
+		//전염시작
 		for (int i = 0; i < virus.size(); i++) {
 			int y = virus.get(i)[0];
 			int x = virus.get(i)[1];
