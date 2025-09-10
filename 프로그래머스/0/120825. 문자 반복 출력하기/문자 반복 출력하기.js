@@ -1,0 +1,1 @@
+const solution = (my_string, n) => [...my_string].map((c) => c.repeat(n)).join("");
