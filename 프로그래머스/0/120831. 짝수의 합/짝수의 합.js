@@ -1,11 +1,9 @@
 const solution = (n) => {
-   let num_list = new Array(n);
+    let result = 0;
     
-    for(let i = 0; i<n; i++) {
-        num_list[i] = i+1;
+    for(let i = 0; i<=n; i+=2) {
+        result += i;
     }
     
-    return num_list.reduce((acc, cur) => {
-        return cur % 2 == 0 ? acc + cur :  acc;  
-    }, 0)
+    return result;
 }
