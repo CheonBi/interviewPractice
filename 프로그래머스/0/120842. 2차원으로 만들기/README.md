@@ -1,10 +1,10 @@
 # [level 0] 2차원으로 만들기 - 120842 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/120842?language=javascript) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/120842) 
 
 ### 성능 요약
 
-메모리: 33.5 MB, 시간: 0.19 ms
+메모리: 33.4 MB, 시간: 0.05 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 09월 25일 17:11:24
+2025년 09월 25일 17:21:15
 
 ### 문제 설명
 
