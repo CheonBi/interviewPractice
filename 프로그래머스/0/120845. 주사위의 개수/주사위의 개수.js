@@ -1,10 +1,1 @@
-const solution = (box, n) => {
-    let result = 1;
-    
-    for (const v of box) {
-        result *= Math.trunc(v / n);
-    }
-    
-    return result;
-    
-}
+const solution = (box, n) => box.reduce((acc, cur) => acc * Math.trunc(cur / n), 1); 
