@@ -1,22 +1,20 @@
-function solution(answers) {
-    //1 2 3 4 5 ....
-    //2 1 2 3 2 4 2 5 ...
-    //3 3 1 1 2 2 4 4 5 5 ...
+const solution = (answers) => {
     
-    const first = [1,2,3,4,5];
-    const second = [2,1,2,3,2,4,2,5];
-    const third = [3,3,1,1,2,2,4,4,5,5];
-    let answer = [];
+    let result = [];
     
-    const first_ans = answers.filter((e, idx) => e === first[idx % first.length]).length;
-    const second_ans = answers.filter((e, idx) => e === second[idx % second.length]).length;
-    const third_ans = answers.filter((e, idx) => e === third[idx % third.length]).length;
+    const patternA = [1,2,3,4,5];
+    const patternB = [2,1,2,3,2,4,2,5];
+    const patternC = [3,3,1,1,2,2,4,4,5,5];
     
-    const max = Math.max(first_ans, second_ans, third_ans)
+    const supoA = answers.filter((v,index) => v == patternA[index%5]).length;
+    const supoB = answers.filter((v,index) => v == patternB[index%8]).length;
+    const supoC = answers.filter((v,index) => v == patternC[index%10]).length;
     
-    if(first_ans === max) answer.push(1)
-    if(second_ans === max) answer.push(2)
-    if(third_ans === max) answer.push(3)
+    const max = Math.max(supoA, Math.max(supoB, supoC));
     
-    return answer;
+    if(supoA === max) result.push(1);
+    if(supoB === max) result.push(2);
+    if(supoC === max) result.push(3);
+    
+    return result;
 }
