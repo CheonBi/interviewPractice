@@ -1,14 +1,16 @@
-function solution(sizes) {
-    var answer = 0;
+const solution = (sizes) => {
     
-    const rotate = sizes.map(([w,h]) => w < h ? [h,w] : [w,h] )
+    let result = [0,0];
+    
+    for(const rect of sizes) {
+        const [w,h] = rect;
         
-    let max = [0,0]
+        const max = Math.max(w,h);
+        const min = Math.min(w,h);
+        
+        if(max > result[0]) result[0] = max;
+        if(min > result[1]) result[1] = min;
+    }
     
-    rotate.forEach(([w,h]) => {
-        max[0] = Math.max(max[0], w)
-        max[1] = Math.max(max[1], h)
-    })
-    
-    return max[0] * max[1];
+    return result[0] * result[1];
 }
