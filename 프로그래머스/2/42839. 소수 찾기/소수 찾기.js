@@ -29,7 +29,7 @@ const solution = (numbers) => {
     for(let i = 1; i <= numbers.length; i++) {
         const permutation = [...getPermutation([...numbers], i)];
         const primeNumbers = permutation.filter((arr) => {
-            const number = +arr.join('');
+            const number = (+arr.join(''));
             const isPrimeNum = isPrime(number);
             return isPrimeNum;
         })
