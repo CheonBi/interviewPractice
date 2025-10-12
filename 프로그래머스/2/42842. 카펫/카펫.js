@@ -1,12 +1,13 @@
-function solution(brown, yellow) {
-    const sum = brown + yellow;
+const solution = (brown, yellow) => {
+    const carpet = brown + yellow;
     
-    for(var y = 3; y <= sum / y; y++){
-        if(sum % y == 0) {
-            var x = sum / y;
+    //최소 높이 -> 3
+    for (let height = 3; height <= brown; height++) {
+        if (carpet % height === 0) { //나머지가 없을 때만
+            let weight = carpet / height;
             
-            if((y-2) * (x-2) === yellow) {
-                return [x,y]
+            if((height - 2) * (weight - 2) === yellow) {
+                return [weight, height];
             }
         }
     }
