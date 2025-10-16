@@ -1,21 +1,39 @@
-let answer = 0;
-
-function solution(numbers, target) {
-
-    dfs(0,0,numbers, target)
+const solution = (numbers, target) => {
     
-    return answer;
-}
-
-function dfs(index, sum, numbers, target) {
-    if(index === numbers.length) {
-        if(sum === target) {
-            answer++;
+    let result = 0;
+    
+    const dfs = (start, depth, n, visited) => {
+        //타겟넘버 계산
+        if(depth === n) {
+            let targetNumber = 0;
+            for(const element of numbers) {
+                targetNumber += element;
+            }
+        
+            if(targetNumber === target) result++;
+            
+            return;
         }
+        
+        for(let i = start; i < numbers.length; i++) {
+            if(!visited[i]) {
+                visited[i] = true;
+                numbers[i] *= -1; 
+                
+                dfs(i+1, depth + 1, n, visited);
+                
+                visited[i] = false;
+                numbers[i] *= -1;
+            }
+        }
+        
         return;
     }
     
+    for(let i = 0; i < numbers.length; i++) {
+        let visited = Array.from({length: numbers.length}, () => false);
+        dfs(0, 0, i+1, visited);
+    }
     
-    dfs(index + 1, sum + numbers[index], numbers, target);
-    dfs(index + 1, sum - numbers[index], numbers, target);
+    return result;
 }
