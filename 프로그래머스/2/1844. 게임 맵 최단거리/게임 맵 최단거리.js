@@ -16,7 +16,7 @@ const solution = (maps) => {
         queue.push([0, 0, 1]);
         visited[0][0] = true;
         
-        while(!!queue.length) {
+        while(queue.length > 0) {
             const [y,x,z] = queue.shift();
                   
             if(y === n - 1 && x === m - 1) {
