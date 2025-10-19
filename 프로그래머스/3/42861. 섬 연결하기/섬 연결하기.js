@@ -33,5 +33,6 @@ const solution = (n, costs) => {
             union(cost[0], cost[1], parents); //연결
         }
     }
+
     return result;
 }
